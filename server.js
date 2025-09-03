@@ -1,45 +1,29 @@
 // server.js
-
-const mysql = require('mysql2');
-const dotenv = require('dotenv');
-dotenv.config();
-
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
-
-db.connect((err) => {
-  if (err) throw err;
-  console.log('Connected to MySQL database');
-});
-
-module.exports = db;
-const express = require('express');
-const dotenv = require('dotenv');
-const userRoutes = require('./routes/userRoutes');
-const path = require('path'); // Tambahkan ini
+const express = require("express");
+const dotenv = require("dotenv");
+const path = require("path");
+const userRoutes = require("./routes/userRoutes");
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.json()); // Untuk parsing body JSON
+// Middleware
+app.use(express.json());
 
-// Tambahkan ini untuk melayani file statis dari folder 'public'
-app.use(express.static(path.join(__dirname, 'public')));
+// Melayani file statis dari folder 'public'
+app.use(express.static(path.join(__dirname, "public")));
 
 // Rute API
-app.use('/users', userRoutes);
+app.use("/users", userRoutes);
 
-app.get('/', (req, res) => {
-  // Sekarang, rute root akan melayani index.html dari folder public
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// Rute root
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-app.listen(port, () => {
-  console.log(`Server berjalan di http://localhost:${port}`);
+// Jalankan server di 0.0.0.0 agar bisa diakses dari luar
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server berjalan di http://0.0.0.0:${port}`);
 });
