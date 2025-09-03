@@ -33,7 +33,7 @@ userForm.addEventListener("submit", async (e) => {
   const user = {
     name: nameInput.value,
     email: emailInput.value,
-    age: ageInput.value,
+    age: parseInt(ageInput.value, 10),
   };
   let url = "/users",
     method = "POST";
