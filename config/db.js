@@ -12,6 +12,22 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
+  acquireTimeout: 60000,
+  timeout: 60000,
+  reconnect: true,
+  ssl: process.env.DB_HOST.includes('rds.amazonaws.com') ? {
+    rejectUnauthorized: false
+  } : false
 });
+
+// Test connection
+pool.getConnection()
+  .then(connection => {
+    console.log('Database connected successfully');
+    connection.release();
+  })
+  .catch(err => {
+    console.error('Database connection failed:', err.message);
+  });
 
 module.exports = pool;

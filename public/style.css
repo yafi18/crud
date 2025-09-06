@@ -92,6 +92,8 @@ table th {
     border-radius: 4px;
     cursor: pointer;
     color: white;
+    font-size: 12px;
+    min-width: 50px;
 }
 
 .edit-btn {
@@ -108,4 +110,16 @@ table th {
 
 .delete-btn:hover {
     background-color: #c82333;
+}
+
+.edit-btn:disabled,
+.delete-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Loading state */
+form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
