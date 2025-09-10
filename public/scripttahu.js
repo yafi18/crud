@@ -7,6 +7,9 @@ const submitBtn = document.getElementById("submitBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 const userTableBody = document.querySelector("#userTable tbody");
 
+const apiUrl = "https://Bahlil-env.eba-pdweuxce.us-east-1.elasticbeanstalk.com i";
+
+
 async function loadUsers() {
   try {
     const res = await fetch("/users");
