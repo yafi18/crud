@@ -19,3 +19,8 @@ router.put("/:id", userController.updateUser);
 router.delete("/:id", userController.deleteUser);
 
 module.exports = router;
+
+const cors = require('cors');
+app.use(cors({
+  origin: 'http://temola.s3-website-us-east-1.amazonaws.com '
+}));
